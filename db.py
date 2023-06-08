@@ -1,6 +1,7 @@
 import pymysql
 import pprint
 
+
 # 创建连接
 
 def get_conn():
@@ -12,6 +13,7 @@ def get_conn():
         charset='utf8'
     )
 
+
 def query_data(sql):
     conn = get_conn()
     try:
@@ -20,6 +22,18 @@ def query_data(sql):
         return cursor.fetchall()
     finally:
         conn.close()
+
+
+def update_data(sql):
+    conn = get_conn()
+    try:
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+        cursor.execute(sql)
+        conn.commit()
+        return '删除成功'
+    finally:
+        conn.close()
+
 
 if __name__ == "__main__":
     sql = "SELECT * FROM Persons"
