@@ -15,9 +15,9 @@ def user():
         sql = ''
         person_id = request.args.get('id')
         if person_id:
-            sql = f"SELECT * FROM Persons WHERE PersonID={person_id}"
+            sql = f"SELECT * FROM t_user WHERE user_id={person_id}"
         else:
-            sql = "SELECT * FROM Persons"
+            sql = "SELECT * FROM t_user"
         datas = query_data(sql)
         if len(datas) > 1:
             response = jsonify({'code': 200, 'data': datas})
@@ -38,15 +38,16 @@ def user():
         password = request_form['password']
         nick_name = request_form['nickname']
         sql = f"""
-        INSERT INTO Persons (PersonID, LastName, FirstName, NickName, Sex, Email, PASSWORD)
-        VALUES ({person_id}, '{last_name}', '{first_name}', '{nick_name}', {sex}, '{email}', '{password}')"""
+        INSERT INTO t_user (user_id, last_name, first_name, nick_name, sex, email, user_password)
+        VALUES ({person_id}, '{last_name}', '{first_name}', '{nick_name}', {sex}, '{email}', '{password}')
+        """
         datas = update_data(sql)
         return datas
     elif request.method == 'PUT':
         return 'PUT'
     elif request.method == 'DELETE':
         person_id = request.args.get('id')
-        sql = f"DELETE FROM Persons WHERE PersonID={person_id}"
+        sql = f"DELETE FROM t_user WHERE user_id={person_id}"
         datas = update_data(sql)
         return datas
     else:

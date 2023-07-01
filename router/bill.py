@@ -2,25 +2,25 @@ from functools import reduce
 
 from flask import Flask, request, Blueprint
 
-billlist = Blueprint('billlist', __name__)
-billtask = Blueprint('billtask', __name__)
+billlist = Blueprint('bill-list', __name__)
+billtask = Blueprint('bill-task', __name__)
 
 
-@billlist.route('/billlist', methods=['GET'])
+@billlist.route('/bill-list', methods=['GET'])
 def bill_list():
     if request.method == 'GET':
-        return billlist
+        return [{'id': '123', 'name': 'task1'}]
     else:
         return []
 
 
-@billtask.route('/billtask', methods=['GET', 'POST', 'DELETE'])
+@billtask.route('/bill-task', methods=['GET', 'POST', 'DELETE'])
 def bill_task():
     if request.method == 'POST':
         return '新增一条数据'
     elif request.method == 'DELETE':
-        id = request.args["id"]
-        return f'删除{id}'
+        taskid = request.args["id"]
+        return f'删除{taskid}'
     else:
-        id = request.args["id"]
-        return f'查询数据{id}'
+        taskid: str = request.args["id"]
+        return f'查询数据{taskid}'
