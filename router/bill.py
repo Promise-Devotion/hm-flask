@@ -19,10 +19,7 @@ def bill_list():
         db = SQLManager()
         datas = db.get_list(sql)
         db.close()
-        if len(datas) > 1:
-            response = jsonify({'code': 200, 'data': datas})
-        else:
-            response = jsonify({'code': 200, 'data': datas[0]})
+        response = jsonify({'code': 200, 'data': datas})
         print(response)
         return response
 
