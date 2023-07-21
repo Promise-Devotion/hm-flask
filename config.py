@@ -1,6 +1,5 @@
 import pymysql
 
-
 DB_CONFIG = {
     "host": "127.0.0.1",
     "port": 3306,
@@ -9,6 +8,22 @@ DB_CONFIG = {
     "db": "huamao",
     "charset": "utf8"
 }
+
+REDIS_HOST = "127.0.0.1"
+REDIS_PORT = 6379
+REDIS_PASSWD = "123456"
+# token过期时间(单位：秒)
+EXPIRE_TIME = 600
+# REDIS_CONFIG = {
+#     "REDIS_HOST": "127.0.0.1",
+#     "REDIS_PORT": 6379,
+#     "REDIS_PASSWD": "123456",
+#     # token过期时间(单位：秒)
+#     "EXPIRE_TIME": 600
+# }
+
+# MD5加密盐值
+MD5_SALT = "huamao#%*"
 
 
 class SQLManager(object):
