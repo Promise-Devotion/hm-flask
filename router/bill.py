@@ -1,7 +1,10 @@
 from functools import reduce
 
-from flask import Flask, request, Blueprint, jsonify
-from pre_request import pre, Rule
+from flask import Flask
+from flask import request
+from flask import Blueprint
+from flask import jsonify
+from pre_request import Rule
 from config import SQLManager
 
 
@@ -14,12 +17,16 @@ def bill_list():
     if request.method == 'GET':
         user_id = request.args.get('id')
         sql = f'''
-        SELECT * FROM t_bill WHERE user_id = {user_id}
+        SELECT user_id AS userid, bill_id AS billid, create_time AS createtime, 
+        update_time AS updatetime, bill_name AS billname, bill_amount AS billamount, 
+        bill_remark AS billremark, bill_type AS billtype, bill_status AS billstatus 
+        FROM t_bill 
+        WHERE user_id = {user_id}
         '''
         db = SQLManager()
         datas = db.get_list(sql)
         db.close()
-        response = jsonify({'code': 200, 'data': datas})
+        response = jsonify({'code': 200, 'data': datas, "message": "查询成功!"})
         print(response)
         return response
 

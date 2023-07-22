@@ -2,13 +2,15 @@ import json
 import pprint
 import time
 
-from flask import request, Blueprint, jsonify
+from flask import request
+from flask import Blueprint
+from flask import jsonify
 from common.md5_operate import get_md5
 
 from config import SQLManager
 # from flask_restful import Resource, Api
-from db import query_data, update_data
-from redis_common.redis_client import RedisDb, redis_db
+from db import update_data
+from redis_common.redis_client import redis_db
 
 userapi = Blueprint('user', __name__)
 
