@@ -16,6 +16,17 @@ billtask = Blueprint('bill-task', __name__)
 def bill_list():
     if request.method == 'GET':
         user_id = request.args.get('id')
+        usersql = f'''
+        SELECT * from t_user WHERE user_id = {user_id}
+        '''
+        db = SQLManager()
+        userdatas: any = db.get_list(usersql)
+        db.close()
+        print(userdatas)
+        if len(userdatas) <= 0:
+            re = jsonify({'code': 500, 'data': {}, "message": "查无此人!"})
+            return re
+
         sql = f'''
         SELECT user_id AS userid, bill_id AS billid, create_time AS createtime, 
         update_time AS updatetime, bill_name AS billname, bill_amount AS billamount, 
